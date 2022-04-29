@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Place;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -28,8 +30,8 @@ class OrderController extends Controller
         $order->pick_id = $pick_place->id;
         $order->dest_id = $dest_place->id;
         $order->price = abs($price);
+        $order->user_id = auth()->user()->id;
         $order->save();
-
         return view('order_result',compact('order'));
 
 
